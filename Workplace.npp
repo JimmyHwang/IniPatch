@@ -1,0 +1,6 @@
+<NotepadPlus>
+    <Project name="SetProxy">
+        <File name="set-proxy.py" />
+        <File name="install.sh" />
+    </Project>
+</NotepadPlus>
