@@ -137,7 +137,7 @@ class INI_CLASS():
     self.DefaultFlag = default_flag
     self.TempFile = GetTempFile()
     #
-    # Has section defination
+    # Workaround if no section
     #
     if self.DefaultFlag:    
       cfg_fn = self.TempFile
@@ -149,7 +149,10 @@ class INI_CLASS():
       fp.close()
       self.DefaultFlag = True
     else:
-      cfg_fn = fn      
+      cfg_fn = fn
+    #
+    # Load Config
+    #
     self.Config = ConfigUpdater()
     self.Config.read(cfg_fn)
     
@@ -158,12 +161,16 @@ class INI_CLASS():
       cfg_fn = self.TempFile
     else:
       cfg_fn = self.File
-      
+    #
+    # Export Config to file
+    #
     cfg = self.Config
     cfg_fp = open(cfg_fn, "w")
     cfg.write(cfg_fp)
-    cfg_fp.close()
-    
+    cfg_fp.close()    
+    #
+    # Remove [Default] when DefaultFlag == True
+    #
     if self.DefaultFlag:
       lines = ReadFileToArray(cfg_fn)
       lines.pop(0)                      # Remove [Default] section
@@ -201,8 +208,6 @@ def Usage():
   
 def main():
   global VerboseFlag
-  global SimulationFlag
-  global Log
   
   VerboseFlag = False  
   IniFile = False
