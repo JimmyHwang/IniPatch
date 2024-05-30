@@ -277,9 +277,9 @@ def main():
             key = temp[1]
             iobj.Set(section, key, value)
           else:
-            Log.Error("Invalid data format without section name")
+            logging.error("Invalid data format, section not defined")
         else:
-          Log.Error("Invalid data format without '='")
+          logging.error("Invalid data format, no character '=' found")
     
   if TestFlag:
     iobj = INI_CLASS("abc", 1)
